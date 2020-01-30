@@ -105,7 +105,12 @@ export function loadGTFS(stream: Readable): Promise<GTFSData> {
         const services = {};
 
         for (const c of Object.values(calendars)) {
-          services[c.serviceId] = new Service(c.startDate, c.endDate, c.days, dates[c.serviceId] || {});
+          services[c.serviceId] = {
+            startDate: c.startDate,
+            endDate: c.endDate,
+            days: c.days,
+            dates: dates[c.serviceId],
+          };
         }
 
         for (const t of trips) {

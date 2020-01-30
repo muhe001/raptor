@@ -3,7 +3,6 @@ import { JourneyFactory } from "../../../src/results/JourneyFactory";
 import { allDays, j, services, setDefaultTrip, st, t, tf } from "../util";
 import { RaptorAlgorithmFactory } from "../../../src/raptor/RaptorAlgorithmFactory";
 import { DepartAfterQuery } from "../../../src/query/DepartAfterQuery";
-import { Service } from "../../../src/gtfs/Service";
 
 describe("DepartAfterQuery", () => {
   const journeyFactory = new JourneyFactory();
@@ -528,12 +527,12 @@ describe("DepartAfterQuery", () => {
       st("C", 1100, null)
     );
 
-    trip.service = new Service(
-      20181001,
-      20181015,
-      allDays,
-      {}
-    );
+    trip.service = {
+      startDate: 20181001,
+      endDate: 20181015,
+      days: allDays,
+      dates: {}
+    };
 
     const trips = [
       t(
@@ -576,12 +575,12 @@ describe("DepartAfterQuery", () => {
 
     const days = Object.assign({}, allDays, { 1: false });
 
-    trip.service = new Service(
-      20181001,
-      20991231,
+    trip.service = {
+      startDate: 20181001,
+      endDate: 20991231,
       days,
-      {}
-    );
+      dates: {}
+    };
 
     const trips = [
       t(
@@ -622,12 +621,12 @@ describe("DepartAfterQuery", () => {
       st("C", 1100, null)
     );
 
-    trip.service = new Service(
-      20991231,
-      20991231,
-      allDays,
-      { 20181022: true }
-    );
+    trip.service = {
+      startDate: 20991231,
+      endDate: 20991231,
+      days: allDays,
+      dates: { 20181022: true }
+    };
 
     const trips = [
       t(
@@ -668,12 +667,12 @@ describe("DepartAfterQuery", () => {
       st("C", 1100, null)
     );
 
-    trip.service = new Service(
-      20181001,
-      20991231,
-      allDays,
-      { 20181022: false }
-    );
+    trip.service = {
+      startDate: 20181001,
+      endDate: 20991231,
+      days: allDays,
+      dates:  { 20181022: false }
+    };
 
     const trips = [
       t(

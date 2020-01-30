@@ -1,22 +1,21 @@
 import { StopID, StopTime, Time, Transfer, Trip } from "../../src/gtfs/GTFS";
 import { AnyLeg, Journey } from "../../src/results/Journey";
-import { Service } from "../../src/gtfs/Service";
 
 export const allDays = { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: true };
 
 export const services = {
-  "1": new Service(
-    20180101,
-    20991231,
-    allDays,
-    {}
-  ),
-  "2": new Service(
-    20190101,
-    20991231,
-    allDays,
-    {}
-  )
+  "1": {
+    startDate: 20180101,
+    endDate: 20991231,
+    days: allDays,
+    dates:  {}
+  },
+  "2": {
+    startDate: 20190101,
+    endDate: 20991231,
+    days: allDays,
+    dates:  {}
+  }
 };
 
 let tripId = 0;

@@ -1,4 +1,11 @@
-import { DayOfWeek, Time, Trip } from "../gtfs/GTFS";
+import { DayOfWeek, Time, Trip, Service } from "../gtfs/GTFS";
+
+function runsOn(service: Service, date: number, dow: DayOfWeek) {
+  return service.dates[date] || (!service.dates.hasOwnProperty(date) &&
+    service.startDate <= date &&
+    service.endDate >= date &&
+    service.days[dow]);
+}
 
 /**
  * Returns trips for specific routes. Maintains a reference to the last trip returned in order to reduce plan time.
@@ -32,7 +39,7 @@ export class RouteScanner {
         break;
       }
       // if it is reachable and the service is running that day, update the last valid trip found
-      else if (trip.service.runsOn(this.date, this.dow)) {
+      else if (runsOn(trip.service, this.date, this.dow)) {
         lastFound = trip;
       }
 

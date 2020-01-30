@@ -120,3 +120,13 @@ export interface Stop {
  * Stops indexed by ID
  */
 export type StopIndex = Record<StopID, Stop>;
+
+/**
+ * GTFS service
+ */
+export interface Service {
+  startDate: DateNumber;
+  endDate: DateNumber;
+  days: Record<DayOfWeek, boolean>;
+  dates: DateIndex;
+}
