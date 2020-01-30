@@ -4,7 +4,6 @@ import {Interchange, TransfersByOrigin} from "../raptor/RaptorAlgorithm";
 import {pushNested, setNested} from "ts-array-utils";
 import {Readable} from "stream";
 import {TimeParser} from "./TimeParser";
-import { Service } from "./Service";
 
 /**
  * Returns trips, transfers, interchange time and calendars from a GTFS zip.

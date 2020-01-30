@@ -1,4 +1,5 @@
 import { CalendarIndex, DateNumber, DayOfWeek, ServiceID, Trip } from "../gtfs/GTFS";
+import { ServiceUtil } from "../gtfs/ServiceUtil";
 import { Interchange, RaptorAlgorithm, TransfersByOrigin } from "./RaptorAlgorithm";
 import { QueueFactory } from "./QueueFactory";
 import { RouteScannerFactory, TripsIndexedByRoute } from "./RouteScanner";
@@ -36,7 +37,7 @@ export class RaptorAlgorithmFactory {
       const dateNumber = getDateNumber(date);
       const dow = date.getDay() as DayOfWeek;
 
-      trips = trips.filter(trip => trip.service.runsOn(dateNumber, dow));
+      trips = trips.filter(trip => ServiceUtil.runsOn(trip.service, dateNumber, dow));
     }
 
     trips.sort((a, b) => a.stopTimes[0].departureTime - b.stopTimes[0].departureTime);

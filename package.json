@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/planarnetwork/raptor.git"
+    "url": "git+https://github.com/muhe001/raptor.git"
   },
   "keywords": [
     "Journey",
@@ -30,9 +30,9 @@
   "author": "Linus Norton <linusnorton@gmail.com>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/planarnetwork/raptor/issues"
+    "url": "https://github.com/muhe001/raptor/issues"
   },
-  "homepage": "https://github.com/planarnetwork/raptor#readme",
+  "homepage": "https://github.com/muhe001/raptor#readme",
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
