@@ -27,8 +27,8 @@ export class RangeQuery {
    * results.
    */
   public plan(
-    origin: StopID,
-    destination: StopID,
+    origins: StopID[],
+    destinations: StopID[],
     date: Date,
     time: number = 1,
     endTime: number = this.ONE_DAY
@@ -37,7 +37,7 @@ export class RangeQuery {
     const results: Journey[] = [];
 
     while (time < endTime) {
-      const newResults = this.groupQuery.plan([origin], [destination], date, time);
+      const newResults = this.groupQuery.plan(origins, destinations, date, time);
 
       results.push(...newResults);
 

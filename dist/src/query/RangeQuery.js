@@ -17,10 +17,10 @@ class RangeQuery {
      * Perform a query at midnight, and then continue to search one minute after the earliest departure of each set of
      * results.
      */
-    plan(origin, destination, date, time = 1, endTime = this.ONE_DAY) {
+    plan(origins, destinations, date, time = 1, endTime = this.ONE_DAY) {
         const results = [];
         while (time < endTime) {
-            const newResults = this.groupQuery.plan([origin], [destination], date, time);
+            const newResults = this.groupQuery.plan(origins, destinations, date, time);
             results.push(...newResults);
             if (newResults.length === 0) {
                 break;

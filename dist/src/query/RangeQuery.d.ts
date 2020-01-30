@@ -18,5 +18,5 @@ export declare class RangeQuery {
      * Perform a query at midnight, and then continue to search one minute after the earliest departure of each set of
      * results.
      */
-    plan(origin: StopID, destination: StopID, date: Date, time?: number, endTime?: number): Journey[];
+    plan(origins: StopID[], destinations: StopID[], date: Date, time?: number, endTime?: number): Journey[];
 }

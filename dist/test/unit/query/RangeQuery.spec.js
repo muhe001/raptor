@@ -15,7 +15,7 @@ describe("RangeQuery", () => {
         ];
         const raptor = RaptorAlgorithmFactory_1.RaptorAlgorithmFactory.create(trips, {}, {});
         const query = new RangeQuery_1.RangeQuery(raptor, journeyFactory);
-        const result = query.plan("A", "C", new Date("2018-10-16"));
+        const result = query.plan(["A"], ["C"], new Date("2018-10-16"));
         util_1.setDefaultTrip(result);
         chai.expect(result).to.deep.equal([
             util_1.j([
@@ -57,7 +57,7 @@ describe("RangeQuery", () => {
         ];
         const raptor = RaptorAlgorithmFactory_1.RaptorAlgorithmFactory.create(trips, {}, {});
         const query = new RangeQuery_1.RangeQuery(raptor, journeyFactory);
-        const result = query.plan("A", "C", new Date("2018-10-16"));
+        const result = query.plan(["A"], ["C"], new Date("2018-10-16"));
         util_1.setDefaultTrip(result);
         chai.expect(result).to.deep.equal([
             util_1.j([

@@ -28,7 +28,7 @@ describe("RangeQuery", () => {
 
     const raptor = RaptorAlgorithmFactory.create(trips, {}, {});
     const query = new RangeQuery(raptor, journeyFactory);
-    const result = query.plan("A", "C", new Date("2018-10-16"));
+    const result = query.plan(["A"], ["C"], new Date("2018-10-16"));
 
     setDefaultTrip(result);
 
@@ -83,7 +83,7 @@ describe("RangeQuery", () => {
 
     const raptor = RaptorAlgorithmFactory.create(trips, {}, {});
     const query = new RangeQuery(raptor, journeyFactory);
-    const result = query.plan("A", "C", new Date("2018-10-16"));
+    const result = query.plan(["A"], ["C"], new Date("2018-10-16"));
 
     setDefaultTrip(result);
 
