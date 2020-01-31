@@ -18,6 +18,7 @@ exports.services = {
 let tripId = 0;
 function t(...stopTimes) {
     return {
+        routeId: "1",
         tripId: "trip" + tripId++,
         stopTimes: stopTimes,
         serviceId: "1",
@@ -35,7 +36,7 @@ function st(stop, arrivalTime, departureTime) {
     };
 }
 exports.st = st;
-const defaultTrip = { tripId: "1", serviceId: "1", stopTimes: [], service: exports.services["1"] };
+const defaultTrip = { routeId: "1", tripId: "1", serviceId: "1", stopTimes: [], service: exports.services["1"] };
 function j(...legStopTimes) {
     return {
         departureTime: getDepartureTime(legStopTimes),

@@ -64,6 +64,7 @@ export type ServiceID = string;
  */
 export interface Trip {
   tripId: TripID;
+  routeId: string;
   stopTimes: StopTime[];
   serviceId: ServiceID;
   service: Service;
@@ -128,3 +129,24 @@ export interface Service {
   days: Record<DayOfWeek, boolean>;
   dates: DateIndex;
 }
+
+/**
+ * GTFS route_id
+ */
+export type RouteId = string;
+
+/**
+ * GTFS route
+ */
+export interface Route {
+  routeId: RouteId;
+  agencyId: string;
+  routeShortName: string;
+  routeLongName: string;
+  routeType: number;
+}
+
+/**
+ * Routes indexed by ID
+ */
+export type RouteIndex = Record<RouteId, Route>;

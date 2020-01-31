@@ -15,6 +15,7 @@ function loadGTFS(stream) {
     const dates = {};
     const stopTimes = {};
     const stops = {};
+    const routes = {};
     const processor = {
         link: row => {
             const t = {
@@ -48,7 +49,13 @@ function loadGTFS(stream) {
             ts_array_utils_1.setNested(row.exception_type === "1", dates, row.service_id, row.date);
         },
         trip: row => {
-            trips.push({ serviceId: row.service_id, tripId: row.trip_id, stopTimes: [], service: {} });
+            trips.push({
+                routeId: row.route_id,
+                serviceId: row.service_id,
+                tripId: row.trip_id,
+                stopTimes: [],
+                service: {}
+            });
         },
         stop_time: row => {
             const stopTime = {
@@ -86,6 +93,16 @@ function loadGTFS(stream) {
                 timezone: row.zone_id
             };
             ts_array_utils_1.setNested(stop, stops, row.stop_id);
+        },
+        route: row => {
+            const route = {
+                routeId: row.route_id,
+                agencyId: row.agency_id,
+                routeShortName: row.route_short_name,
+                routeLongName: row.route_long_name,
+                routeType: row.route_type
+            };
+            ts_array_utils_1.setNested(route, routes, row.route_id);
         }
     };
     return new Promise(resolve => {
@@ -106,7 +123,7 @@ function loadGTFS(stream) {
                 t.stopTimes = stopTimes[t.tripId];
                 t.service = services[t.serviceId];
             }
-            resolve([trips, transfers, interchange, stops]);
+            resolve([trips, transfers, interchange, stops, routes]);
         });
     });
 }

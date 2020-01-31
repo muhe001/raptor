@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { StopIndex, Trip } from "./GTFS";
+import { StopIndex, Trip, RouteIndex } from "./GTFS";
 import { Interchange, TransfersByOrigin } from "../raptor/RaptorAlgorithm";
 import { Readable } from "stream";
 /**
@@ -9,4 +9,4 @@ export declare function loadGTFS(stream: Readable): Promise<GTFSData>;
 /**
  * Contents of the GTFS zip file
  */
-export declare type GTFSData = [Trip[], TransfersByOrigin, Interchange, StopIndex];
+export declare type GTFSData = [Trip[], TransfersByOrigin, Interchange, StopIndex, RouteIndex];

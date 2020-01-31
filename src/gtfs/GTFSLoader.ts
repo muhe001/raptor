@@ -1,5 +1,5 @@
 import * as gtfs from "gtfs-stream";
-import {CalendarIndex, StopIndex, Trip} from "./GTFS";
+import {CalendarIndex, StopIndex, Trip, RouteIndex} from "./GTFS";
 import {Interchange, TransfersByOrigin} from "../raptor/RaptorAlgorithm";
 import {pushNested, setNested} from "ts-array-utils";
 import {Readable} from "stream";
@@ -17,6 +17,7 @@ export function loadGTFS(stream: Readable): Promise<GTFSData> {
   const dates = {};
   const stopTimes = {};
   const stops = {};
+  const routes = {};
 
   const processor = {
     link: row => {
@@ -52,7 +53,13 @@ export function loadGTFS(stream: Readable): Promise<GTFSData> {
       setNested(row.exception_type === "1", dates, row.service_id, row.date);
     },
     trip: row => {
-      trips.push({ serviceId: row.service_id, tripId: row.trip_id, stopTimes: [], service: {} as any });
+      trips.push({
+        routeId: row.route_id,
+        serviceId: row.service_id,
+        tripId: row.trip_id,
+        stopTimes: [],
+        service: {} as any
+      });
     },
     stop_time: row => {
       const stopTime = {
@@ -93,6 +100,17 @@ export function loadGTFS(stream: Readable): Promise<GTFSData> {
       };
 
       setNested(stop, stops, row.stop_id);
+    },
+    route: row => {
+      const route = {
+        routeId: row.route_id,
+        agencyId: row.agency_id,
+        routeShortName: row.route_short_name,
+        routeLongName: row.route_long_name,
+        routeType: row.route_type
+      };
+
+      setNested(route, routes, row.route_id);
     }
   };
 
@@ -117,7 +135,7 @@ export function loadGTFS(stream: Readable): Promise<GTFSData> {
           t.service = services[t.serviceId];
         }
 
-        resolve([trips, transfers, interchange, stops]);
+        resolve([trips, transfers, interchange, stops, routes]);
       });
   });
 
@@ -126,4 +144,4 @@ export function loadGTFS(stream: Readable): Promise<GTFSData> {
 /**
  * Contents of the GTFS zip file
  */
-export type GTFSData = [Trip[], TransfersByOrigin, Interchange, StopIndex];
+export type GTFSData = [Trip[], TransfersByOrigin, Interchange, StopIndex, RouteIndex];
