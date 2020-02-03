@@ -68,7 +68,8 @@ export class GroupStationDepartAfterQuery {
    */
   private getFoundStations(kConnections: ConnectionIndex, bestArrivals: Arrivals): StopTimes {
     const allStops = Object.keys(kConnections);
-    const stopsWithAnArrival =  allStops.filter(d => kConnections[d] && Object.keys(kConnections[d]).length > 0);
+    const stopsWithAnArrival =  allStops.filter(d =>
+      kConnections[d] && Object.keys(kConnections[d]).length > 0);
 
     // create the origin departure times by subtracting 1 day from the best arrival time
     return stopsWithAnArrival.reduce(keyValue(s => [s, Math.max(1, bestArrivals[s] - 86400)]), {});
@@ -84,7 +85,8 @@ export class GroupStationDepartAfterQuery {
     destinations: StopID[]
   ): Journey[] {
 
-    const destinationsWithResults = destinations.filter(d => Object.keys(kConnections[d]).length > 0);
+    const destinationsWithResults = destinations.filter(d => 
+      kConnections[d] && Object.keys(kConnections[d]).length > 0);
     const initialResults = destinationsWithResults.flatMap(d => this.resultsFactory.getResults(kConnections, d));
 
     // reverse the previous connections and then work back through each day pre-pending journeys

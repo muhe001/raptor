@@ -62,7 +62,7 @@ class GroupStationDepartAfterQuery {
      * into individual journeys.
      */
     getJourneysFromConnections(kConnections, prevConnections, destinations) {
-        const destinationsWithResults = destinations.filter(d => Object.keys(kConnections[d]).length > 0);
+        const destinationsWithResults = destinations.filter(d => kConnections[d] && Object.keys(kConnections[d]).length > 0);
         const initialResults = destinationsWithResults.flatMap(d => this.resultsFactory.getResults(kConnections, d));
         // reverse the previous connections and then work back through each day pre-pending journeys
         return prevConnections
